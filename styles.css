@@ -23,8 +23,6 @@ body {
 }
 
 .global-container {
-  max-width: 1920px;
-  margin: 0 auto;
   position: relative;
   width: 100%;
 }
@@ -91,7 +89,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 30px;
-  margin-top: 20px;
+  margin-top: -20px; /* Reduced to move phone and button up */
 }
 
 .header-right {
@@ -110,20 +108,33 @@ body {
 .nav-links a {
   text-decoration: none;
   color: var(--black);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 400;
   letter-spacing: 0.5px;
   padding-bottom: 5px;
   padding-right: 22px;
-  border-bottom: 3px solid transparent;
-  transition:
-    color 0.3s,
-    border-bottom 0.3s;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-orange);
+  transition: width 0.3s;
 }
 
 .nav-links a:hover {
   color: var(--primary-orange);
-  border-bottom: 3px solid var(--primary-orange);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: calc(100% - 22px);
 }
 
 .nav-links a.active {
@@ -194,11 +205,12 @@ body {
   align-items: center;
   gap: 12px;
   color: var(--black);
+  font-size: 28px;
 }
 
 .phone-icon {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   background-color: var(--primary-orange);
   border-radius: 50%;
   display: flex;
@@ -220,13 +232,13 @@ body {
 }
 
 .small-text {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
 }
 
 .phone-number {
-  font-size: 18px;
+  font-size: 28px;
   font-weight: 700;
 }
 
@@ -262,12 +274,13 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: url("images/Mask group.png") no-repeat center center;
-  background-size: cover;
+  aspect-ratio: 1920 / 1080;
+  background: url("images/Mask group.png") no-repeat center top;
+  background-size: 100% auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 300px; /* Increased to move content down */
+  padding-top: 50px; /* Further reduced to move content up */
 }
 
 .hero-overlay {
@@ -298,13 +311,13 @@ body {
 .hero-headline {
   color: var(--white);
   font-family: "Outfit", sans-serif;
-  font-size: clamp(30px, 4vw, 60.52px);
+  font-size: clamp(10px, 3.5vw, 60.52px);
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: 0%;
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
 }
 
 .accent-text {
@@ -320,8 +333,9 @@ body {
   letter-spacing: 0%;
   text-align: center;
   text-transform: uppercase;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+  font-size: clamp(16px, 1.5vw, 28px);
 }
 
 /* Buttons */
@@ -368,7 +382,7 @@ body {
 }
 
 .hero-buttons {
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -379,16 +393,28 @@ body {
   padding: 15px 25px;
 }
 
+.hero-truck-line {
+  position: absolute;
+  bottom: 35%;
+  right: 7%;
+  width: 210px;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 /* Social Sidebar */
 .social-sidebar {
   position: absolute;
   right: 30px;
-  top: 50%;
+  top: 49%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 20px;
   z-index: 10;
+  align-items: center;
 }
 
 .social-sidebar a {
@@ -401,12 +427,20 @@ body {
   color: var(--white);
 }
 
+.sidebar-line {
+  width: 2px;
+  height: 60px;
+  object-fit: cover;
+}
+
 /* Features Section */
 .features {
   background-color: #000;
-  padding: 60px 0 80px 0;
+  padding: 40px 0 80px 0;
   width: 100%;
   position: relative;
+  margin-top: -240px;
+  z-index: 10;
 }
 
 .features-container {
@@ -414,8 +448,8 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding: 0 5%;
+  align-items: stretch;
+  padding: 0 1%;
 }
 
 .feature-item {
@@ -423,9 +457,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 0 40px;
   position: relative;
+}
+
+.feature-item:nth-of-type(2) {
+  transform: translateY(20px);
 }
 
 .feature-icon-wrapper {
@@ -440,8 +479,8 @@ body {
 
 .icon-circle {
   position: absolute;
-  width: 58px;
-  height: 58px;
+  width: 68px;
+  height: 68px;
   background-color: var(--primary-orange);
   border-radius: 50%;
   top: 50%;
@@ -453,26 +492,30 @@ body {
 .icon-circle::after {
   content: "";
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   background-color: var(--primary-orange);
   border-radius: 50%;
   right: -32px;
-  top: 70%;
+  top: 65%;
   transform: translateY(-50%);
 }
 
 .feature-icon-wrapper img {
   position: relative;
   z-index: 1;
-  max-width: 65px;
+  max-width: 85px;
   height: auto;
   display: block;
-  transform: translateY(15px);
+  transform: translateY(17px);
 }
 
 .feature-item:first-of-type .feature-icon-wrapper img {
-  transform: translate(10px, 15px);
+  transform: translate(16px, 16px);
+}
+
+.feature-item:nth-of-type(2) .feature-icon-wrapper img {
+  transform: translate(0, 25px);
 }
 
 .feature-item h3 {
@@ -485,10 +528,10 @@ body {
 
 .feature-item p {
   color: var(--white);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 1.6;
-  max-width: 300px;
+  max-width: 350px;
   opacity: 0.8;
 }
 
@@ -506,8 +549,9 @@ body {
 
 .feature-divider {
   width: 1px;
-  height: 120px;
+  height: 180px;
   background-color: rgba(255, 255, 255, 0.2);
+  align-self: center;
 }
 
 /* Services Section */
@@ -1209,6 +1253,9 @@ body {
 }
 
 @media (max-width: 1024px) {
+  .features {
+    margin-top: 0;
+  }
   .features-container {
     flex-direction: column;
     gap: 60px;
@@ -1386,12 +1433,11 @@ body {
   }
   .why-title {
     font-size: 32px;
-    text-align: center;
   }
   .why-description {
-    font-size: 25px;
+    font-size: 14px;
     margin-bottom: 30px;
-    margin-left: 60px;
+    margin-left: 10px;
   }
   .why-choose-cards {
     grid-template-columns: 1fr;
@@ -2952,7 +2998,6 @@ body {
   .faq-title {
     font-size: 40px;
     margin-top: 0;
-    color: #000;
   }
 }
 
