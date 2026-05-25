@@ -781,27 +781,27 @@ body {
 }
 
 .about-title {
-  font-size: 64px;
-  font-weight: 900;
-  color: var(--black);
-  line-height: 0.9;
-  text-transform: uppercase;
-  font-family: "Outfit", sans-serif;
   position: relative;
   display: inline-block;
 }
 
+.about-title-img {
+  max-width: 450px;
+  height: auto;
+  display: block;
+}
+
 .about-icon {
-  height: 80px;
+  height: 120px;
   width: auto;
   position: absolute;
-  left: 255px;
-  bottom: -1px;
+  right: -30px;
+  bottom:15px;
 }
 
 .about-content p {
-  font-size: 15px;
-  color: #555;
+  font-size: 18px;
+  color: #000000;
   line-height: 1.4;
   margin-bottom: 20px;
   max-width: 550px;
@@ -810,7 +810,7 @@ body {
 .about-content p strong {
   font-size: 15px;
   color: var(--black);
-  display: block;
+  display: inline;
   margin-bottom: 0px;
   line-height: 1.4;
 }
@@ -1339,8 +1339,13 @@ body {
   .about-container {
     gap: 20px;
   }
-  .about-title {
-    font-size: 54px;
+  .about-title-img {
+    max-width: 380px;
+  }
+  .about-icon {
+    height: 55px;
+    right: 20px;
+    bottom: -30px;
   }
 }
 
@@ -1409,20 +1414,23 @@ body {
     display: flex;
     justify-content: center;
   }
+  .about-title-img {
+    max-width: 320px;
+  }
   .about-title {
-    font-size: 48px;
     margin-top: 20px;
+  }
+  .about-icon {
+    height: 50px;
+    right: 50%;
+    transform: translateX(160px);
+    bottom: -30px;
   }
   {
     .about-tag {
       font-size: 24px;
       font-weight: 800;
     }
-  }
-  .about-icon {
-    height: 60px;
-    position: static;
-    margin-left: 10px;
   }
   .about-buttons {
     flex-direction: column;
@@ -1478,10 +1486,16 @@ body {
     height: 350px;
     left: -5%;
   }
+  .about-title-img {
+    max-width: 280px;
+  }
   .about-title {
-    margin-top: 10PX;
-    font-size: 56px;
-    font-weight: 700;
+    margin-top: 10px;
+  }
+  .about-icon {
+    height: 40px;
+    transform: translateX(140px);
+    bottom: -25px;
   }
   .about-tag {
     font-size: 24px;
