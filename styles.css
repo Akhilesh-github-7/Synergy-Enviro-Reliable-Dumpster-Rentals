@@ -1281,6 +1281,12 @@ body {
   .hero {
     padding-top: 180px;
     min-height: 80vh; /* Reduced height on smaller screens to keep content visible */
+    aspect-ratio: auto;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-truck-line {
+    display: none;
   }
   .hero-headline {
     margin-top: 0;
@@ -1515,22 +1521,24 @@ body {
   .hero {
     padding-top: 120px;
     min-height: 60vh;
+    background-size: cover;
+    background-position: center;
   }
   .hero-headline {
     font-size: 28px;
-    .hero-subheadline {
-      font-size: 14px;
-    }
-    .why-title {
-      font-size: 28px;
-    }
-    .why-description {
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-    .why-choose-cards {
-      gap: 25px;
-    }
+  }
+  .hero-subheadline {
+    font-size: 14px;
+  }
+  .why-title {
+    font-size: 28px;
+  }
+  .why-description {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+  .why-choose-cards {
+    gap: 25px;
   }
   .dumpster-sizes {
     padding: 60px 0;
