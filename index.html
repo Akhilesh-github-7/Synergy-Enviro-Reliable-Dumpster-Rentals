@@ -77,15 +77,39 @@
             </div>
             <div class="hero-overlay"></div>
             <div class="hero-container">
-                <div class="hero-content-border">
-                    <h1 class="hero-headline">
-                        RELIABLE DUMPSTER RENTALS IN<br>
-                        <span class="accent-text">PRINCE EDWARD ISLAND</span>
-                    </h1>
-                    <p class="hero-subheadline">AFFORDABLE DUMPSTER RENTALS FOR RENOVATIONS AND CLEANUPS IN PEI.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="window.location.href='#contact'">RESERVE A DUMPSTER</button>
-                        <button class="btn btn-secondary" onclick="window.location.href='#dumpsters'">GET PRICING</button>
+                <div class="hero-content-wrapper">
+                    <div class="hero-content-border active">
+                        <h1 class="hero-headline">
+                            RELIABLE DUMPSTER RENTALS IN<br>
+                            <span class="accent-text">PRINCE EDWARD ISLAND</span>
+                        </h1>
+                        <p class="hero-subheadline">AFFORDABLE DUMPSTER RENTALS FOR RENOVATIONS AND CLEANUPS IN PEI.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="window.location.href='#contact'">RESERVE A DUMPSTER</button>
+                            <button class="btn btn-secondary" onclick="window.location.href='#dumpsters'">GET PRICING</button>
+                        </div>
+                    </div>
+                    <div class="hero-content-border">
+                        <h1 class="hero-headline">
+                            FASTER DELIVERY AND PICKUP FOR<br>
+                            <span class="accent-text">RESIDENTIAL & COMMERCIAL</span>
+                        </h1>
+                        <p class="hero-subheadline">RELIABLE WASTE MANAGEMENT SOLUTIONS TAILORED TO YOUR PROJECT NEEDS.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="window.location.href='#contact'">RESERVE A DUMPSTER</button>
+                            <button class="btn btn-secondary" onclick="window.location.href='#dumpsters'">GET PRICING</button>
+                        </div>
+                    </div>
+                    <div class="hero-content-border">
+                        <h1 class="hero-headline">
+                            SUSTAINABLE SOLUTIONS FOR<br>
+                            <span class="accent-text">A CLEANER PEI</span>
+                        </h1>
+                        <p class="hero-subheadline">ECO-FRIENDLY WASTE DISPOSAL AND RECYCLING SERVICES SINCE 2014.</p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="window.location.href='#contact'">RESERVE A DUMPSTER</button>
+                            <button class="btn btn-secondary" onclick="window.location.href='#dumpsters'">GET PRICING</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -821,14 +845,17 @@
         // Hero Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
+        const contentBlocks = document.querySelectorAll('.hero-content-border');
         const navLines = document.querySelectorAll('.nav-line');
         const totalSlides = slides.length;
 
         function goToSlide(n) {
             slides[currentSlide].classList.remove('active');
+            contentBlocks[currentSlide].classList.remove('active');
             navLines[currentSlide].classList.remove('active');
             currentSlide = (n + totalSlides) % totalSlides;
             slides[currentSlide].classList.add('active');
+            contentBlocks[currentSlide].classList.add('active');
             navLines[currentSlide].classList.add('active');
 
             // Set overlay transparency for slides 2 and 3
