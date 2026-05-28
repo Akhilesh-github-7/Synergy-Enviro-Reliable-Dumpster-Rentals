@@ -484,7 +484,9 @@
             <h2 class="reviews-title">WHAT OUR CUSTOMERS SAY</h2>
             
             <div class="reviews-carousel">
-                <div class="review-card side-card">
+                <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="review-card side-card" id="review-left">
                     <div class="review-card-content">
                         <p class="review-text">Quick delivery and hassle-free pickup.<br>Ideal for our home renovation.<br>Highly recommend!</p>
                         <p class="review-author">Charlottetown Homeowner</p>
@@ -496,8 +498,7 @@
                     </div>
                 </div>
 
-                <div class="review-card center-card">
-                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="review-card center-card" id="review-center">
                     <div class="review-card-content">
                         <p class="review-text">I really appreciate the collaborative efforts<br>we've seen at Synergy Enviro. It's inspiring to<br>see how we can all come together to tackle<br>environmental challenges!</p>
                         <p class="review-author">Liam Parker</p>
@@ -507,10 +508,9 @@
                         <img src="images/Customer Review/Ellipse 72.png" alt="Circle Background">
                         <span>L</span>
                     </div>
-                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
-                <div class="review-card side-card">
+                <div class="review-card side-card" id="review-right">
                     <div class="review-card-content">
                         <p class="review-text">Fantastic service with reasonable prices.<br>I highly recommend Synergy Enviro!<br>You won't be disappointed.</p>
                         <p class="review-author">Derek Anderson</p>
@@ -521,6 +521,8 @@
                         <span>D</span>
                     </div>
                 </div>
+
+                <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
 
             <div class="reviews-footer">
@@ -860,10 +862,18 @@
 
             // Set overlay transparency for slides 2 and 3
             const overlay = document.querySelector('.hero-overlay');
+            const navbar = document.querySelector('.navbar');
             if (currentSlide === 1 || currentSlide === 2) {
                 overlay.classList.add('transparent');
             } else {
                 overlay.classList.remove('transparent');
+            }
+
+            // Change navbar link color for slide 3
+            if (currentSlide === 2) {
+                navbar.classList.add('slide-3-active');
+            } else {
+                navbar.classList.remove('slide-3-active');
             }
         }
 
@@ -880,6 +890,82 @@
                 sliderInterval = setInterval(nextSlide, 5000);
             });
         });
+
+        // Customer Reviews Carousel
+        const reviews = [
+            {
+                text: "Quick delivery and hassle-free pickup.<br>Ideal for our home renovation.<br>Highly recommend!",
+                author: "Charlottetown Homeowner",
+                role: "Charlottetown Property Solutions",
+                avatar: "images/Customer Review/Ellipse 70.png",
+                initial: "C"
+            },
+            {
+                text: "I really appreciate the collaborative efforts<br>we've seen at Synergy Enviro. It's inspiring to<br>see how we can all come together to tackle<br>environmental challenges!",
+                author: "Liam Parker",
+                role: "Elysium Innovations",
+                avatar: "images/Customer Review/Ellipse 72.png",
+                initial: "L"
+            },
+            {
+                text: "Fantastic service with reasonable prices.<br>I highly recommend Synergy Enviro!<br>You won't be disappointed.",
+                author: "Derek Anderson",
+                role: "PEI Contractor",
+                avatar: "images/Customer Review/Ellipse 71.png",
+                initial: "D"
+            }
+        ];
+
+        let currentReviewIndex = 1; // Start with the second review in the center
+
+        function updateReviews() {
+            const leftIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+            const centerIndex = currentReviewIndex;
+            const rightIndex = (currentReviewIndex + 1) % reviews.length;
+
+            updateCardContent('review-left', reviews[leftIndex]);
+            updateCardContent('review-center', reviews[centerIndex]);
+            updateCardContent('review-right', reviews[rightIndex]);
+        }
+
+        function updateCardContent(cardId, review) {
+            const card = document.getElementById(cardId);
+            const textEl = card.querySelector('.review-text');
+            const authorEl = card.querySelector('.review-author');
+            const roleEl = card.querySelector('.review-role');
+            const avatarImg = card.querySelector('.review-avatar img');
+            const avatarSpan = card.querySelector('.review-avatar span');
+
+            // Add fade-out effect
+            card.style.opacity = '0.5';
+            card.style.transform = cardId === 'review-center' ? 'scale(0.95)' : 'scale(0.9)';
+            card.style.transition = 'all 0.3s ease';
+
+            setTimeout(() => {
+                textEl.innerHTML = review.text;
+                authorEl.textContent = review.author;
+                roleEl.textContent = review.role;
+                avatarImg.src = review.avatar;
+                avatarSpan.textContent = review.initial;
+
+                // Fade-in effect
+                card.style.opacity = '1';
+                card.style.transform = cardId === 'review-center' ? 'scale(1)' : 'scale(1)';
+            }, 300);
+        }
+
+        document.querySelector('.prev-btn').addEventListener('click', () => {
+            currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+            updateReviews();
+        });
+
+        document.querySelector('.next-btn').addEventListener('click', () => {
+            currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+            updateReviews();
+        });
+
+        // Initialize reviews
+        updateReviews();
     </script>
 </body>
 </html>
