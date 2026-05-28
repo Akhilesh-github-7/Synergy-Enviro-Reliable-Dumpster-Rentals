@@ -70,6 +70,11 @@
         </header>
 
         <section id="home" class="hero">
+            <div class="hero-slides">
+                <div class="hero-slide active" style="background-image: url('images/Mask group.png');"></div>
+                <div class="hero-slide" style="background-image: url('images/slide2.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('images/slide3.jpg');"></div>
+            </div>
             <div class="hero-overlay"></div>
             <div class="hero-container">
                 <div class="hero-content-border">
@@ -85,7 +90,11 @@
                 </div>
             </div>
 
-            <img src="images/truck line.png" alt="" class="hero-truck-line">
+            <div class="hero-slider-nav">
+                <div class="nav-line active" data-slide="0"></div>
+                <div class="nav-line" data-slide="1"></div>
+                <div class="nav-line" data-slide="2"></div>
+            </div>
 
             <div class="social-sidebar">
                 <img src="images/line.png" alt="line" class="sidebar-line">
@@ -806,6 +815,42 @@
                 
                 // Toggle current item
                 item.classList.toggle('expanded');
+            });
+        });
+
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const navLines = document.querySelectorAll('.nav-line');
+        const totalSlides = slides.length;
+
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            navLines[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            navLines[currentSlide].classList.add('active');
+
+            // Set overlay transparency for slides 2 and 3
+            const overlay = document.querySelector('.hero-overlay');
+            if (currentSlide === 1 || currentSlide === 2) {
+                overlay.classList.add('transparent');
+            } else {
+                overlay.classList.remove('transparent');
+            }
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        let sliderInterval = setInterval(nextSlide, 5000);
+
+        navLines.forEach((line, index) => {
+            line.addEventListener('click', () => {
+                clearInterval(sliderInterval);
+                goToSlide(index);
+                sliderInterval = setInterval(nextSlide, 5000);
             });
         });
     </script>
